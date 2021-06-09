@@ -14,11 +14,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppRoutingModule } from './app-routing.module';
 
 // material modules
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'; 
+import { MaterialModule } from './material/material.module';
 
 // compoents
 import { AppComponent } from './app.component';
@@ -39,16 +35,10 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
 
     // material
-    MatGridListModule,
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
+    MaterialModule,
 
     // ngxs module and cofig
-    NgxsModule.forRoot([]),
-    NgxsReduxDevtoolsPluginModule.forRoot({}),
-    NgxsLoggerPluginModule.forRoot({}),
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Jampool Garcia",
+            "age": 27,
+            "email": "jampoolgarcia@gmail.com"
+        },
+        {
+            "id": 2,
+            "name": "Yorgelis rozo",
+            "age": 24,
+            "email": "yorgelisrozo@hotmail.com"
+        },
+        {
+            "id": 3,
+            "name": "Stifen Garcia",
+            "age": 5,
+            "email": "stifengarcia@gmail.com"
+        },
+        {
+            "id": 4,
+            "name": "araña peluda",
+            "age": "20",
+            "email": "arañapeluda@yahoo.com"
+        }
+    ]
+}
