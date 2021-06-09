@@ -5,10 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// ngxs
-import { NgxsModule } from '@ngxs/store';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+// ngrx
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './store';
 
 // routing 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import { MaterialModule } from './material/material.module';
 
 // compoents
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule, 
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
     // routing 
     AppRoutingModule,
@@ -37,8 +39,9 @@ import { AppComponent } from './app.component';
     // material
     MaterialModule,
 
-    // ngxs module and cofig
- 
+    // ngrx module and cofig
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({}),
   ],
   providers: [],
   bootstrap: [AppComponent]
