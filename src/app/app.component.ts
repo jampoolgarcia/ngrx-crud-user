@@ -21,17 +21,14 @@ export class AppComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private store: Store<fromStore.appState>, private _service: UserService){
-    this.store.select('users').subscribe(res =>{
-      this.dataSource = new MatTableDataSource(res.data);
+    this.store.select(fromStore.selectUsersData).subscribe(res =>{
+      this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
 
-    // this._service.getRecords().subscribe( res => {
-    //   this.dataSource = new MatTableDataSource(res);
-    //    this.dataSource.paginator = this.paginator;
-    //    this.dataSource.sort = this.sort;
-    // })
+    this.store.select(fromStore.getUserById(2))
+      .subscribe(res => console.log(res));
   }
 
   ngOnInit(){

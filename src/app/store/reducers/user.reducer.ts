@@ -1,8 +1,6 @@
 import * as fromUserAction from '../actions/user.action';
 import { Action, createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/model/user.model';
-import { state } from '@angular/animations';
-import { act } from '@ngrx/effects';
 
 export interface UserState{
     data: User[],
@@ -39,3 +37,8 @@ export const userReducer = createReducer(
 export function reducer(state: UserState | undefined, action: Action){
     return userReducer(state, action);
 }
+
+export const getUsers = (state: UserState) => state.data;
+export const getUsersLoaded = (state: UserState) => state.loaded;
+export const getUsersLoading = (state: UserState) => state.loading;
+export const getUsersError = (state: UserState) => state.err;
