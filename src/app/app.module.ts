@@ -7,8 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // ngrx
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers } from './store';
+import { effect, reducers } from './store';
 
 // routing 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
     // ngrx module and cofig
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({}),
+    EffectsModule.forRoot(effect),
   ],
   providers: [],
   bootstrap: [AppComponent]

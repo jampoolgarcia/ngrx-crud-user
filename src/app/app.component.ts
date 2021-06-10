@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,7 @@ import * as fromStore from './store';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   public displayedColumns: string[] = ['name', 'age', 'email', 'action'];
   public dataSource!: MatTableDataSource<User>; 
@@ -21,17 +21,21 @@ export class AppComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private store: Store<fromStore.appState>, private _service: UserService){
-    // this.store.select('users').subscribe(res =>{
-    //   this.dataSource = new MatTableDataSource(res.data);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    // });
+    this.store.select('users').subscribe(res =>{
+      this.dataSource = new MatTableDataSource(res.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
 
-    this._service.getRecords().subscribe( res => {
-      this.dataSource = new MatTableDataSource(res);
-       this.dataSource.paginator = this.paginator;
-       this.dataSource.sort = this.sort;
-    })
+    // this._service.getRecords().subscribe( res => {
+    //   this.dataSource = new MatTableDataSource(res);
+    //    this.dataSource.paginator = this.paginator;
+    //    this.dataSource.sort = this.sort;
+    // })
+  }
+
+  ngOnInit(){
+    this.store.dispatch(fromStore.loadUsers())
   }
 
  filter(event: Event){

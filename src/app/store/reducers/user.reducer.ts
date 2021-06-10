@@ -1,6 +1,8 @@
 import * as fromUserAction from '../actions/user.action';
-import { Action } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/model/user.model';
+import { state } from '@angular/animations';
+import { act } from '@ngrx/effects';
 
 export interface UserState{
     data: User[],
@@ -10,29 +12,30 @@ export interface UserState{
 }
 
 export const initialState: UserState = {
-    data: [{
-        id: 1,
-        name: 'jampool',
-        age: 27,
-        email: 'jampoolgarcia@gmail.com'
-    }],
+    data: [],
     loaded: false,
     loading: false,
     err: ''
 }
 
-export function reducer(state: UserState = initialState, action: Action){
+export const userReducer = createReducer(
+    initialState,
+    on(fromUserAction.loadUsers, state => ({
+        ...state,
+        loading: true
+    })),
+    on(fromUserAction.loadUserSuccess, (state, { users }) => ({
+        ...state,
+        data: users
+    })),
+    on(fromUserAction.loadUserFail, (state, { err }) => ({
+        ...state,
+        loading: false,
+        loaded: false,
+        err
+    }))
+)
 
-        switch(action.type){
-            case fromUserAction.LOAD_USERS:{
-                return {
-                    ...state,
-                    loading: true
-                }
-            }
-
-            default: {
-                return state;
-            }
-        }
+export function reducer(state: UserState | undefined, action: Action){
+    return userReducer(state, action);
 }
